@@ -11,16 +11,28 @@
         </div>
         <div class="row">
             <div class="col">
-                <ul>
+                <ul class="list-group">
                     {% for task in tkl %}
-                        <li>{{task}}</li>
+                        <li class="list-group-item">
+                            <div class="d-flex justify-content-around">
+                                <div class="col">
+                                    {{task[0]}} 
+                                </div>
+                                <div class="col">
+                                    {{task[1]}}
+                                </div>
+                            </div>
+                        </li>
                     {% endfor %}
                 </ul>
             </div>
         </div>
         <div class="row">
             <div class="col">
-                <a class="btn btn-primary" href="{{url_for('addTask')}}">Add Task</a>
+                <a class="btn btn-success" href="{{url_for('addTask')}}">Add Task</a>
+            </div>
+            <div class="col">
+                <a class="btn btn-primary" href="#">Update Task</a>
             </div>
              <div class="col">
                 <a class="btn btn-danger" href="#">Delete Task</a>

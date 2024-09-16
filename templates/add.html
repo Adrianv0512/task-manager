@@ -5,7 +5,7 @@
 
 
 {%block body%}
-    <div class="container text-center"></div>
+    <div class="container text-center">
         <div class="row">
             <div class="col">
                 <p class="display-1">Task Master</p>
@@ -13,14 +13,11 @@
         </div>
         <div class="row">
             <div class="col">
-                <div class="mb-3">
-                    <form method="POST" action="{{url_for('addTask')}}">
-                    <label for="taskForm" class="form-label">Enter Task:</label>
-                    <input type="text" name="taskForm" class="form-control" >
+                <form method="POST" action="{{url_for('addTask')}}">
+                    <label for="taskform" class="form-label">Enter Task:</label>
+                    <input type="text" name="taskform" class="form-control" >
                     <input class="btn btn-primary" type="submit" value="submit">
-                    </form>
-                    
-                </div>
+                </form>
             </div>
         </div>
     </div>
