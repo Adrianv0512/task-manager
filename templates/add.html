@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{%block title%}Task Master{%endblock%}
+
+
+
+{%block body%}
+    <div class="container text-center"></div>
+        <div class="row">
+            <div class="col">
+                <p class="display-1">Task Master</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="mb-3">
+                    <form method="POST" action="{{url_for('addTask')}}">
+                    <label for="taskForm" class="form-label">Enter Task:</label>
+                    <input type="text" name="taskForm" class="form-control" >
+                    <input class="btn btn-primary" type="submit" value="submit">
+                    </form>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+{%endblock%}
