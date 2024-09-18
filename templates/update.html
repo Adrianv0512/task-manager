@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block title %}Task Master{% endblock %}
+
+
+{% block body %}
+
+    <div class="container text-center">
+        <div class="row">
+            <div class="col">
+                <p class="display-1">Task Master</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <ul class="list-group">
+                    {% for task in tkl %}
+                        <li class="list-group-item">
+                            <div class="d-flex justify-content-around">
+                                <div class="col">
+                                    {{task[1]}} 
+                                </div>
+                                <div class="col">
+                                    {{task[2]}}
+                                </div>
+                                <div class="col">
+                                    <form method="POST" action="{{url_for('updatetask')}}">
+                                        <button class="btn btn-danger" type="submit" value="{{task[0]}}" name="Not Started">
+                                            Not Started
+                                        </button>
+                                        <button class="btn btn-warning" type="submit" value="{{task[0]}}" name="In Progress">
+                                            In Progress
+                                        </button>
+                                        <button class="btn btn-success" type="submit" value="{{task[0]}}" name="Completed">
+                                            Completed
+                                        </button>
+ 
+                                    </form>
+                                </div>
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+   </div>
+
+
+
+
+{% endblock %}

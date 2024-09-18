@@ -5,7 +5,21 @@ import sqlite3
 #Creating the database with the 'tasks' table
 con = sqlite3.connect("task.db", check_same_thread=False)
 cur = con.cursor()
-cur.execute("CREATE TABLE IF NOT EXISTS tasks(name, status)")
+cur.execute("CREATE TABLE IF NOT EXISTS tasks(id, name, status)")
+
+idcount = 0
+
+def reorderID():
+    global idcount
+    idcount = 0
+    idl = []
+    data = cur.execute("SELECT id, name, status FROM tasks").fetchall()
+    for i in range(len(data)):
+        idl.append((idcount, data[idcount][0], data[idcount][1]))
+        idcount += 1
+    for task in data:
+        cur.execute("UPDATE tasks SET id=(?) WHERE id=(?) AND name=(?)", idl[0])
+    print(idl)
 
 #Creating the flask application
 app = Flask(__name__, template_folder='templates', static_folder='static', static_url_path='/')
@@ -24,41 +38,44 @@ def addTask():
         return render_template('add.html') # this is a string
         
     elif request.method == 'POST':
+        global idcount
         if 'taskform' in request.form.keys():
-            data =[(request.form.get('taskform'), 'not started')]
+            data =[(idcount, request.form.get('taskform'), 'Not Started')]
             cur.executemany("""
                 INSERT INTO tasks VALUES
-                        (?, ?)
+                        (?, ?, ?)
             """, data)
-        print(request.get_data())
-        return redirect(url_for('index')) # this is a Response
-
-    # nothing is returned if method is neither get nor post
-
-# test endpoint to go with my test script
-@app.route('/test', methods = ["GET", "POST"])
-def test():
-    if request.method == 'GET':
-        return "you hit the get endpoint!!!"
-        
-    elif request.method == 'POST':
-        print("here's the data you posted:")
-        for key in request.form:
-            print(f"\t{key}, {request.form[key]}")
-        return "you hit the post endpoint!!!"
-
-    return "uwu this is a third string to be returned"
+            idcount = idcount + 1
+        return redirect(url_for('index'))
 
 #Delete Task Page
-#NOT IMPLEMENTED YET
-'''
+#When user submits form and sends post request after clicking X button, deletes the task and updates page
 @app.route('/deletetask', methods=['GET', 'POST'])
 def deletetask():
     if request.method == 'GET':
-        return render_template('delete.html')
+        return render_template('delete.html', tkl=cur.execute("SELECT id, name, status FROM tasks"))
     elif request.method == 'POST':
-        return 0
-'''
+        data = cur.execute("SELECT id, name, status FROM tasks").fetchall()
+        index = list(request.form.keys())
+        print(index)
+        print(data)
+        cur.execute("DELETE FROM tasks WHERE id=(?) AND name=(?) AND status=(?)", data[int(index[0])])
+        reorderID()
+        return redirect(url_for('index'))
+
+@app.route('/updatetask', methods=['GET', 'POST'])
+def updatetask():
+    if request.method == 'GET':
+        return render_template('update.html', tkl=cur.execute("SELECT id, name, status FROM tasks"))
+    elif request.method == 'POST':
+        data = cur.execute("SELECT id, name, status FROM tasks").fetchall()
+        status = list(request.form.keys())
+        statl =[status[0], int(request.form.get(status[0]))]
+        print(statl)
+        cur.execute("UPDATE tasks SET status=(?) WHERE id=(?)", statl)
+        print(cur.execute("SELECT id, name, status FROM tasks").fetchall())
+        return redirect(url_for('index'))
+
 
 #Runs the Application
 if __name__ == "__main__":
