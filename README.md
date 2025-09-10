@@ -1,8 +1,8 @@
-📋 Task Manager Web App
+# Task Manager Web App
 
 A simple Flask + SQLite task manager that allows users to add, update, and delete tasks through a clean web interface. Designed as a lightweight productivity tool and as a demonstration of full-stack development fundamentals.
 
-🚀 Features
+# Features
 
 Add tasks with custom names
 
@@ -16,7 +16,7 @@ Flask web server with templated HTML pages (index, add, update, delete)
 
 Bootstrap support for styling (CSS/JS in /static)
 
-🛠️ Tech Stack
+# Tech Stack
 
 Backend: Python, Flask
 
@@ -26,7 +26,7 @@ Frontend: HTML, Jinja2 templates, Bootstrap (CSS/JS)
 
 Environment: Virtualenv (recommended)
 
-📂 Project Structure
+# Project Structure
 .
 ├── app.py              # Flask application entry point
 ├── task.db             # SQLite database (auto-generated)
@@ -41,15 +41,15 @@ Environment: Virtualenv (recommended)
 ├── .gitignore
 └── README.md
 
-⚡ Getting Started
+# Getting Started
 1. Clone the repo
-git clone https://github.com/YOUR-USERNAME/TASK-MANAGER.git
-cd TASK-MANAGER
+git clone https://github.com/adrianv0512/task-manager.git
+cd task-manager
 
 2. Create & activate a virtual environment
 python -m venv venv
 source venv/Scripts/activate   # Windows Git Bash
-# OR
+OR
 venv\Scripts\activate          # Windows CMD/PowerShell
 
 3. Install dependencies
@@ -61,9 +61,9 @@ python app.py
 5. Open in browser
 
 Navigate to:
-👉 http://127.0.0.1:5000/
+http://127.0.0.1:5000/
 
-🔮 Future Improvements
+# Future Improvements
 
 User authentication (login system)
 
@@ -75,6 +75,6 @@ Search/filter tasks
 
 Cloud deployment (Heroku/Render)
 
-📜 License
+# License
 
 This project is licensed under the MIT License — feel free to use and adapt it.
