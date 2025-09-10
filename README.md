@@ -26,21 +26,6 @@ Frontend: HTML, Jinja2 templates, Bootstrap (CSS/JS)
 
 Environment: Virtualenv (recommended)
 
-# Project Structure
-.
-├── app.py              # Flask application entry point
-├── task.db             # SQLite database (auto-generated)
-├── static/             # Static assets (CSS, JS)
-│   ├── css/
-│   └── js/
-├── templates/          # HTML templates (Jinja2)
-│   ├── index.html
-│   ├── add.html
-│   ├── update.html
-│   └── delete.html
-├── .gitignore
-└── README.md
-
 # Getting Started
 1. Clone the repo
 git clone https://github.com/adrianv0512/task-manager.git
